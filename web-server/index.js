@@ -1,7 +1,7 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-const render = require('./render');
+const renderView = require('./render');
 
 const server = http.createServer((req, res) => {
   const httpMethod = req.method;
@@ -10,13 +10,19 @@ const server = http.createServer((req, res) => {
   switch(httpMethod) {
     case 'GET':
       if (pathname === '/') {
+        
         res.writeHead(200, {
           'Content-Type': 'text/html',
         });
-        res.write(`Hello World ${username} <b>This is Node.js Papu!</b>`);
-        return res.end('This is other response');
+        // res.write(`Hello World ${username} <b>This is Node.js Papu!</b>`);
+        // return res.end('This is other response');
+        return res.end(renderView('index'))
+
       } else if (pathname === '/about') {
-        return res.end('This is About page');
+        
+        // return res.end('This is About page');
+        return res.end(renderView('about'))
+
       }
       break;
     case 'POST':
